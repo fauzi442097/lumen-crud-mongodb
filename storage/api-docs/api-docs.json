@@ -1,0 +1,531 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API CRUD Barang",
+        "description": "This is a sample crud barang with mongodb",
+        "contact": {
+            "name": "Ahmad Fauzi",
+            "email": "fauzi442097@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8080",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/barang": {
+            "get": {
+                "tags": [
+                    "Barang"
+                ],
+                "summary": "Get all data barang",
+                "description": "Get all data barang in database",
+                "operationId": "3415f6f852aa37c9b62b1cbac1fc2752",
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "example": "Success"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "_id": {
+                                                        "description": "Id Barang",
+                                                        "type": "string",
+                                                        "example": "62bfd45c1ac213e12405b513"
+                                                    },
+                                                    "namaBarang": {
+                                                        "description": "Nama Barang",
+                                                        "type": "string",
+                                                        "maxLength": 100,
+                                                        "example": "Meja"
+                                                    },
+                                                    "harga": {
+                                                        "description": "Harga Barang",
+                                                        "type": "number",
+                                                        "example": "500000"
+                                                    },
+                                                    "stock": {
+                                                        "description": "Stock Barang",
+                                                        "type": "number",
+                                                        "minLength": 1,
+                                                        "example": "1"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "example": [
+                                                {
+                                                    "_id": "62bfd45c1ac213e12405b513",
+                                                    "namaBarang": "Meja",
+                                                    "harga": "500000",
+                                                    "stock": "1"
+                                                },
+                                                {
+                                                    "_id": "62bfd45c1ac213e12405b500",
+                                                    "namaBarang": "Kulkas",
+                                                    "harga": "3000000",
+                                                    "stock": "5"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Barang"
+                ],
+                "summary": "Update existing data barang",
+                "description": "Update existing data barang to database",
+                "operationId": "146bd78fc0506989baeffa4e166aa652",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "namaBarang",
+                                    "harga",
+                                    "stock"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "description": "Id Barang",
+                                        "type": "string",
+                                        "example": "62bfd45c1ac213e12405b513"
+                                    },
+                                    "namaBarang": {
+                                        "description": "Nama Barang",
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "Komputer"
+                                    },
+                                    "harga": {
+                                        "description": "Harga Barang",
+                                        "type": "number",
+                                        "example": "10000"
+                                    },
+                                    "stock": {
+                                        "description": "Stock Barang",
+                                        "type": "number",
+                                        "minLength": 1,
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "example": "Success Updated"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "namaBarang": {
+                                                    "description": "Nama Barang",
+                                                    "type": "string",
+                                                    "maxLength": 100,
+                                                    "example": "Komputer"
+                                                },
+                                                "harga": {
+                                                    "description": "Harga Barang",
+                                                    "type": "number",
+                                                    "example": "10000"
+                                                },
+                                                "stock": {
+                                                    "description": "Stock Barang",
+                                                    "type": "number",
+                                                    "minLength": 1,
+                                                    "example": "1"
+                                                },
+                                                "_id": {
+                                                    "description": "Id Barang",
+                                                    "type": "string",
+                                                    "example": "62bfd45c1ac213e12405b513"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Response Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": "400"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The id field is required."
+                                                    }
+                                                },
+                                                "namaBarang": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The nama barang field is required."
+                                                    }
+                                                },
+                                                "harga": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The harga field is required."
+                                                    }
+                                                },
+                                                "stock": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The stock field is required."
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Barang"
+                ],
+                "summary": "Create new data barang",
+                "description": "Create new todolist to database",
+                "operationId": "876831cf30f22df5da8f1b10b7914dee",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "namaBarang",
+                                    "harga",
+                                    "stock"
+                                ],
+                                "properties": {
+                                    "namaBarang": {
+                                        "description": "Nama Barang",
+                                        "type": "string",
+                                        "maxLength": 100,
+                                        "example": "Meja"
+                                    },
+                                    "harga": {
+                                        "description": "Harga Barang",
+                                        "type": "number",
+                                        "example": "10000"
+                                    },
+                                    "stock": {
+                                        "description": "Stock Barang",
+                                        "type": "number",
+                                        "minLength": 1,
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "example": "Success Created"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "namaBarang": {
+                                                    "description": "Nama Barang",
+                                                    "type": "string",
+                                                    "maxLength": 100,
+                                                    "example": "Meja"
+                                                },
+                                                "harga": {
+                                                    "description": "Harga Barang",
+                                                    "type": "number",
+                                                    "example": "500000"
+                                                },
+                                                "stock": {
+                                                    "description": "Stock Barang",
+                                                    "type": "number",
+                                                    "minLength": 1,
+                                                    "example": "1"
+                                                },
+                                                "_id": {
+                                                    "description": "Id Barang",
+                                                    "type": "string",
+                                                    "example": "62bfd45c1ac213e12405b513"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "number",
+                                            "example": "400"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "namaBarang": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The nama barang field is required."
+                                                    }
+                                                },
+                                                "harga": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The harga field is required."
+                                                    }
+                                                },
+                                                "stock": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "The stock field is required."
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/barang/{id}": {
+            "get": {
+                "tags": [
+                    "Barang"
+                ],
+                "summary": "Find data barang",
+                "description": "Find data barang in database by Id",
+                "operationId": "0d5d3892027bd58b8c779a1b0d2c4dd5",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "example": "Success"
+                                        },
+                                        "data": {
+                                            "properties": {
+                                                "namaBarang": {
+                                                    "description": "Nama Barang",
+                                                    "type": "string",
+                                                    "maxLength": 100,
+                                                    "example": "Meja"
+                                                },
+                                                "harga": {
+                                                    "description": "Harga Barang",
+                                                    "type": "number",
+                                                    "example": "500000"
+                                                },
+                                                "stock": {
+                                                    "description": "Stock Barang",
+                                                    "type": "number",
+                                                    "minLength": 1,
+                                                    "example": "1"
+                                                },
+                                                "_id": {
+                                                    "description": "Id Barang",
+                                                    "type": "string",
+                                                    "example": "62bfd45c1ac213e12405b513"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Response Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Barang"
+                ],
+                "summary": "Delete existing data barang",
+                "description": "Delete existing data barang in database by Id",
+                "operationId": "c4e24ce1b762ae40ee8a0043f0685076",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Response Success Deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "example": "200"
+                                        },
+                                        "message": {
+                                            "example": "Success deleted"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Response Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "NotFoundResponse": {
+                "title": "Response Not Found",
+                "properties": {
+                    "code": {
+                        "type": "number",
+                        "example": "404"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Data Not Found"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "parameters": {
+            "id": {
+                "name": "id",
+                "in": "path",
+                "description": "Id of data barang",
+                "required": true,
+                "schema": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
