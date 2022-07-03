@@ -18,10 +18,6 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/annotation', function () {
-    dd(base_path('app'));
-});
-
 $router->group(['prefix' => '/api/v1'], function () use ($router) {
     $router->get('/barang', 'BarangController@index');
     $router->get('/barang/{id}', 'BarangController@show');
